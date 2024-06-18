@@ -4,10 +4,9 @@ import socket from '../socket'
 import '@xterm/xterm/css/xterm.css'
 
 const Terminal = () => {
-
+    
     const terminalRef = useRef()
-    const isRendered = useRef(false)
-
+    // const isRendered = useRef(false)
 
     useEffect(() => {
         // if (isRendered.current) return;
@@ -15,8 +14,8 @@ const Terminal = () => {
 
         const term = new XTerminal({
             rows: 20,
-
         });
+        
         term.open(terminalRef.current)
 
         term.onData((data) => {
@@ -28,6 +27,8 @@ const Terminal = () => {
              term.write(data); 
         }
 
+
+        
         socket.on('terminal:data' ,onTerminalData )
 
         return ()=>{

@@ -7,7 +7,6 @@ const path = require('path')
 const cors = require('cors')
 const chokidar = require('chokidar');
 
-
 const ptyProcess = pty.spawn('powershell.exe', [], {
 
     name: 'xterm-color',
@@ -59,7 +58,6 @@ io.on('connection', (socket) => {
 app.get('/files' , async (req , res ) =>{
     const fileTree = await generateFileTree('./user');
     return res.json({ tree : fileTree })
-
 })
 
 

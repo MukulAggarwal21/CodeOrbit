@@ -15,7 +15,7 @@ function App() {
   const [SelectedFileContent, setSelectedFileContent] = useState(" ");
   const [code, setcode] = useState('');
 
-  const isSaved = setSelectedFileContent === code
+  const isSaved = setSelectedFileContent === code ; 
 
   const getFileTree = async () => {
     const response = await fetch('http://localhost:9000/files')
@@ -37,7 +37,7 @@ function App() {
 
   const getFileContents = useCallback(async () => {
     if (!selectedFile) return;
-    const response = await fetch(`http://localhost:9000/files/content?path=$${selectedFile}`);
+    const response = await fetch(`http://localhost:9000/files/content?path=${selectedFile}`);
     const result = await response.json();
     setSelectedFileContent(result.content)
 
@@ -81,7 +81,7 @@ function App() {
           <FileTree onSelect={(path) => setSelectedFile(path)} tree={fileTree} />
         </div>
         <div className="editor">
-          {selectedFile && <p>{selectedFile.replaceAll('/', '>')} {isSaved ? 'saved' : 'unSavaed'}</p>}
+          {selectedFile && <p>{selectedFile.replaceAll('/', '>')} {isSaved ? "Saved ": 'UnSaved'}</p>}
           {/* ace.config.set('basePath', '/path-to-ace-builds/src-noconflict'); */}
 
           <AceEditor
@@ -98,8 +98,6 @@ function App() {
         <Terminal />
       </div>
     </div>
-
-    // </div>
 
   )
 }
